@@ -1,6 +1,9 @@
-$navbar-default-bg: #312312;
+$navbar-default-bg: rgba(49,35,18,.9);
 $light-orange: #ff8c00;
 $navbar-default-color: $light-orange;
+$jumbotron-bg: rgba(126, 171, 103,.6);
+$btn-success-bg: #f8f4e3;
+$btn-success-color: $navbar-default-bg;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -11,7 +14,7 @@ $navbar-default-color: $light-orange;
     float: left;
     margin-right: 10px;
     font-size: 2em;
-    color: #fff;
+    color: $navbar-default-bg;
     text-transform: uppercase;
     letter-spacing: -1px;
     padding-top: 9px;
@@ -19,12 +22,12 @@ $navbar-default-color: $light-orange;
 }
 
 #logo:hover{
-    color: white;
+   
     text-decoration: none;
 }
 
 body{
-    padding-top: 70px;
+    padding-top: 90px;
 }
 
 .topmen{
@@ -54,7 +57,12 @@ h2{
     text-align: center;
     font-weight: normal;
     color: #777;
+   
 }
+ .jumbotext{
+        color: darken($light-orange,20%);
+    }
+    
 
 .left{
     text-align: left;
