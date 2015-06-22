@@ -1,0 +1,20 @@
+<h1>View All Recipes</h1><hr/>
+
+<% @recipes.each do |r| %>
+<div class="row">
+    
+    <div class = "col-md-2 imgspace">
+        <%= get_gravimage r.chef, size:100  %>
+        <br/>
+       <small> Posted by:
+        <%= r.chef.chefname %> </small>
+    </div>
+        <div class = "col-md-9 well">
+           <h3><%= link_to r.name, r %> </h3>
+            <p> <%= r.summary %></p>
+            <small>Posted <%= time_ago_in_words(r.created_at) %> ago.</small>
+        </div>
+    </div>
+    <HR/>
+<% end %>
+<%= link_to "Home Page" , root_path, class: "btn btn-warning" %>

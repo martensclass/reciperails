@@ -1,0 +1,20 @@
+
+<h1>Details for <%= @recipe.name %> </h1>
+<div class="row well">
+    <div class="col-md-8 well">
+        <%= @recipe.summary %> <hr/>
+        <%= simple_format(@recipe.description) %>
+        <br/>
+    </div>
+    <div class="col-md-3 imgspace">
+        <small>Brought to you by</small><br/>
+        <%= get_gravimage @recipe.chef, size:150  %> <br/>
+       <%= @recipe.chef.chefname %> 
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3"><%= link_to "Back to All Recipes", recipes_path, class: "btn btn-warning" %>
+        <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "btn btn-primary" %>
+          
+    </div>
+</div>

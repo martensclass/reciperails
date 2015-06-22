@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <% flash.each do |msgtype, msg| %>
+        <div class="alert alert-<%= msgtype %>">
+            <% if msgtype == "danger" %>
+                <strong>Please fix the following errors</strong>
+                <br><ul>
+                <% msg.each do |m| %>
+                <li> <%= m %> </li>
+                <% end %>
+               </ul>
+            <% else %>
+                <%= msg %>
+                <a class="close" data-dismiss="alert">x</a>
+            <% end %>
+            
+        </div>
+            
+        <% end %>
+    </div>
+    
+</div>
