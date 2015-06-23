@@ -1,21 +1,2 @@
 <H1>Edit Recipe</H1><hr/>
-<div class="row">
-    <div class='col-md-8 col-md-offset-2 well'>
-        <%= form_for @recipe do |f| %>
-            <div class="form-group">
-              Recipe Name: <%= f.text_field :name, class:"form-control" %><br />
-            </div>
-            
-            <div class = "form-group">
-              Summary : <%= f.text_field :summary, class:"form-control" %><br />
-            </div>
-            
-            <div class = "form-group">
-              Description : <%= f.text_area :description, :rows => "8", class:"form-control" %><br />
-            </div>
-            
-              <%= f.submit "Update Recipe", class:"btn btn-warning" %>
-              <%= link_to "Cancel", recipe_path(@recipe), class:"btn btn-danger" %>
-        <% end %>
-    </div>
-</div>
+<%= render 'form' %>

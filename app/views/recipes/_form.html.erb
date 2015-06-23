@@ -1,0 +1,23 @@
+<div class="row">
+    <div class='col-md-8 col-md-offset-2 well'>
+        <%= form_for(@recipe, html: { multipart: true }) do |f| %>
+            <div class="form-group">
+              Recipe Name: <%= f.text_field :name, class:"form-control" %><br />
+            </div>
+            
+            <div class = "form-group">
+              Summary : <%= f.text_field :summary, class:"form-control" %><br />
+            </div>
+            
+            <div class = "form-group">
+              Description : <%= f.text_area :description, :rows => "8", class:"form-control" %><br />
+            </div>
+            
+              Upload Image: <i>(optional)</i>
+               <%= f.file_field :picture, accept:'image/jpeg,image/gif,image/png' %><br />
+  
+              <%= f.submit @recipe.new_record? ? "Create Recipe" : "Update Recipe", class:"btn btn-warning" %>
+              <%= link_to "Cancel", :back, class:"btn btn-danger" %>
+        <% end %>
+    </div>
+</div>

@@ -1,6 +1,5 @@
 class RecipesController < ApplicationController
    
-   
    def index
        @recipes = Recipe.all
    end
@@ -11,6 +10,10 @@ class RecipesController < ApplicationController
    
    def new
       @recipe = Recipe.new
+   end
+   
+   def edit
+       @recipe = Recipe.find(params[:id])
    end
    
    def create
@@ -24,10 +27,6 @@ class RecipesController < ApplicationController
         flash[:danger] = @recipe.errors.full_messages
         render :new
       end
-   end
-   
-   def edit
-       @recipe = Recipe.find(params[:id])
    end
    
    def update
@@ -44,9 +43,8 @@ class RecipesController < ApplicationController
    
    private
    
-   
    def recipe_params
-         params.require(:recipe).permit(:name, :summary, :description)
+         params.require(:recipe).permit(:name, :summary, :description, :picture)
    end
     
 end

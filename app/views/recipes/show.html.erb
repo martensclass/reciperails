@@ -1,20 +1,24 @@
-
-<h1>Details for <%= @recipe.name %> </h1>
-<div class="row well">
-    <div class="col-md-8 well">
-        <%= @recipe.summary %> <hr/>
-        <%= simple_format(@recipe.description) %>
-        <br/>
-    </div>
-    <div class="col-md-3 imgspace">
+<h1><%= @recipe.name %> Details</h1>
+<div class="row">
+    <div class="col-md-2 imgspace">
         <small>Brought to you by</small><br/>
         <%= get_gravimage @recipe.chef, size:150  %> <br/>
        <%= @recipe.chef.chefname %> 
     </div>
+    <div class="col-md-9 well">
+    <div class="row">
+        <div class="col-md-7">
+            <h3>Summary:  <%= @recipe.summary %> </h3><hr style = 'background-color: #999; height: 2px' />
+            <%= simple_format(@recipe.description) %>
+        </div>
+        <div class="col-md-5">
+            <%= image_tag(@recipe.picture.url, size:"400x240", class: 'img img-rounded img-responsive') if @recipe.picture? %>
+        </div>
+    </div>
+    </div>    
 </div>
 <div class="row">
-    <div class="col-md-3"><%= link_to "Back to All Recipes", recipes_path, class: "btn btn-warning" %>
+    <div class="col-md-3 col-md-offset-2"><%= link_to "Back to All Recipes", recipes_path, class: "btn btn-warning" %>
         <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "btn btn-primary" %>
-          
     </div>
 </div>
