@@ -16,7 +16,7 @@
               Upload Image: <i>(optional)</i>
                <%= f.file_field :picture, accept:'image/jpeg,image/gif,image/png' %><br />
   
-              <%= f.submit @recipe.new_record? ? "Create Recipe" : "Update Recipe", class:"btn btn-warning" %>
+              <%= f.submit @recipe.new_record? ? "Create Recipe" : "Update Recipe", class:"btn btn-primary" %>
               <%= link_to "Cancel", :back, class:"btn btn-danger" %>
         <% end %>
     </div>
