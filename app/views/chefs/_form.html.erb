@@ -1,0 +1,20 @@
+<div class="row">
+    <div class='col-md-8 col-md-offset-2 well'>
+        <%= form_for @chef do |f| %>
+            <div class="form-group">
+             Name: <%= f.text_field :chefname, class:"form-control" %><br />
+            </div>
+            
+            <div class = "form-group">
+              Email: <%= f.text_field :email, class:"form-control" %><br />
+            </div>
+            
+             <div class = "form-group">
+              <%= @chef.new_record? ? "Password:" : "New Password: (leave blank to keep the same password)" %> <%= f.password_field :password, class:"form-control" %><br />
+            </div>
+            
+              <%= f.submit @chef.new_record? ? "Register me as a New Chef" : "Update Profile", class:"btn btn-primary" %>
+              <%= link_to "Cancel", :back, class:"btn btn-danger" %>
+        <% end %>
+    </div>
+</div>

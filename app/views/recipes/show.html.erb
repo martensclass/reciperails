@@ -3,7 +3,7 @@
     <div class="col-md-2 imgspace">
         <small>Brought to you by</small><br/>
         <%= get_gravimage @recipe.chef, size:150  %> <br/>
-       <%= @recipe.chef.chefname %> 
+       <%= link_to @recipe.chef.chefname, @recipe.chef %> 
     </div>
     <div class="col-md-9 well">
     <div class="row">
@@ -12,13 +12,25 @@
             <%= simple_format(@recipe.description) %>
         </div>
         <div class="col-md-5">
-            <%= image_tag(@recipe.picture.url, size:"400x240", class: 'img img-rounded img-responsive') if @recipe.picture? %>
+            <%= image_tag(@recipe.picture.url, size:"400x240", class: 'img img-rounded img-responsive') if @recipe.picture? %> <br/>
+            <div class="pull-right">
+                <small><%= @recipe.thumbs_up_total %></small>
+                <%= link_to like_recipe_path(@recipe, like: true), method: :post do %>
+                    <span class="glyphicon glyphicon-thumbs-up"></span> <small>Like</small>
+                <% end %> | 
+                <small><%= @recipe.thumbs_down_total %></small>
+                 <%= link_to like_recipe_path(@recipe, like: false), method: :post do %>            
+                <span class="glyphicon glyphicon-thumbs-down"></span> <small>Dislike</small> 
+                <% end %>
+            </div>
         </div>
     </div>
     </div>    
 </div>
 <div class="row">
     <div class="col-md-8 col-md-offset-2"><%= link_to "Back to All Recipes", recipes_path, class: "btn btn-warning" %>
-        <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "btn btn-primary" %>
+       <% if @recipe.chef == current_user %>
+           <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "btn btn-primary" %>
+        <% end %>
     </div>
 </div>

@@ -5,7 +5,7 @@
         This is the home page for the ruby on rails app
     </h2>
     
-    <%= link_to "Sign up now", "#", class: "btn btn-large btn-success" %>
+    <%= link_to "Sign up now", register_path, class: "btn btn-large btn-success" %>
     
 </div>
 
@@ -20,10 +20,14 @@
     
     <div class="col-lg-4">
         <h3 class="midrow">
-            View Recipes as Guest User
+            Log Into myRecipes as a Chef
         </h3>
-        <h2 class="left">Browse and view recipes as a guest and Sign up later</h2>
-        <p> <%= link_to "Browse Recipe Listings", recipes_path, class: "btn btn-warning btn-small" %> </p>
+        <h2 class="left">Log in to add new recipes, edit your own recipes, vote on recipies and more!</h2>
+        <% if logged_in? %>
+            <p class="left" style="background: #f8f4e3;padding:10px;">You are already logged in as: <%= current_user.chefname %> </p>
+        <% else %>
+            <p> <%= link_to "Log Into myRecipes", login_path, class: "btn btn-warning btn-small" %> </p>
+        <% end %>
     </div>
     
     <div class="col-lg-4">

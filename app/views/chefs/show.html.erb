@@ -1,0 +1,44 @@
+<h1>All recipes by <%= @chef.chefname %> </h1><hr/>
+<div class="row">
+    <div class="col-md-3 img-space">
+         <%= get_gravimage @chef, size:300  %><br/>
+         <% if current_user == @chef %>
+            <center> <%= link_to "Update My Profile", edit_chef_path, class:"btn btn-primary btn-sm" %> </center>
+        <% end %>
+    </div>
+    <div class = "col-md-8 col-md-offset-1">
+            <%= will_paginate @recipes%>    
+        <br/>
+        <% @recipes.each do |r| %>
+            <div class="row">
+                <div class = "col-md-7 well">
+                   <h3 style='margin-top: -5px'><%= link_to r.name, r %> </h3><br>
+                    <p> <%= r.summary %></p>
+                    <small>Posted <%= time_ago_in_words(r.created_at) %> ago.</small><br>
+                     <div class="pull-right">
+                        <small><%= r.thumbs_up_total %></small>
+                        <%= link_to like_recipe_path(r, like: true), method: :post do %>
+                            <span class="glyphicon glyphicon-thumbs-up"></span> <small>Like</small>
+                        <% end %> | 
+                        <small><%= r.thumbs_down_total %></small>
+                         <%= link_to like_recipe_path(r, like: false), method: :post do %>            
+                            <span class="glyphicon glyphicon-thumbs-down"></span> <small>Dislike</small> 
+                        <% end %>
+                    </div>
+                </div>
+            
+                <div class = "col-md-3">
+                    <%= image_tag(r.picture.url, size: "250x150", class: "imgspace img-thumbnail") if r.picture? %>
+                </div>
+            </div>
+
+        <% end %>
+       <div class="row">
+           <div class="col md-9 col-md-offset-1">
+               <%= link_to "List All Recipes", recipes_path, class: "btn btn-warning" %>
+              <%= link_to "List All Chefs", chefs_path, class: "btn btn-warning" %>
+           </div>
+       </div>
+    </div>
+</div>
+ 

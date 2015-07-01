@@ -1,20 +1,47 @@
-<h1>View All Recipes</h1><hr/>
+<div class = "row">
+    <div class="col-md-3">
+        <div class="pull-right">
+            <%= will_paginate %>    
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h1>View All Recipes</h1><hr/>        
+    </div>
+</div>
+
 <% @recipes.each do |r| %>
 <div class="row">
     <div class = "col-md-2 imgspace">
         <%= get_gravimage r.chef, size:100  %>
         <br/>
        <small> Posted by:
-        <%= r.chef.chefname %> </small>
+        <%= link_to r.chef.chefname, r.chef %> </small>
     </div>
         <div class = "col-md-6 well">
            <h3 style='margin-top: -5px'><%= link_to r.name, r %> </h3><br>
             <p> <%= r.summary %></p>
-            <small>Posted <%= time_ago_in_words(r.created_at) %> ago.</small><br>&nbsp;
+            <small>Posted <%= time_ago_in_words(r.created_at) %> ago.</small><br>
+             <div class="pull-right">
+                <small><%= r.thumbs_up_total %></small>
+                <%= link_to like_recipe_path(r, like: true), method: :post do %>
+                    <span class="glyphicon glyphicon-thumbs-up"></span> <small>Like</small>
+                <% end %> | 
+                <small><%= r.thumbs_down_total %></small>
+                 <%= link_to like_recipe_path(r, like: false), method: :post do %>            
+                <span class="glyphicon glyphicon-thumbs-down"></span> <small>Dislike</small> 
+                <% end %>
+            </div>
         </div>
         <div class = "col-md-3">
-            <%= image_tag(r.picture.url, size: "250x150", class: "imgspace img-thumbnail") if r.picture? %>
+            <%= image_tag(r.picture.url, size: "200x100", class: "imgspace img-thumbnail") if r.picture? %>
         </div>
     </div>
     <HR/>
 <% end %>
+ <div class = "row">
+    <div class="col-md-3">
+        <div class="pull-right">
+            <%= will_paginate %>    
+        </div>
+    </div>
+</div>

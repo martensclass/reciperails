@@ -1,0 +1,32 @@
+<div class = "row">
+    <div class="col-md-3">
+        <div class="pull-right">
+            <%= will_paginate %>    
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h1>All Chefs</h1><hr/>
+    </div>
+</div>
+
+<% @chefs.each do |c| %>
+<div class="row">
+    
+    <div class="col-md-3 col-md-offset-1">
+        <%= get_gravimage c, size:175 %>
+    </div>
+    <div class="col-md-5 well" style="margin-top:10px">
+        <h3><%= link_to c.chefname, c %></h3><hr style = 'background-color: #999; height: 1px' />
+        <p><%= c.email %></p>
+    </div>
+   
+</div>
+ <% end %>
+  <div class = "row">
+    <div class="col-md-3">
+        <div class="pull-right">
+            <%= will_paginate %>    
+        </div>
+    </div>
+</div>
+

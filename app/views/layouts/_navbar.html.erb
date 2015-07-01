@@ -1,15 +1,53 @@
 <header class="navbar navbar-fixed-top navbar-default">
+  
     <div class="container">
-      <%= link_to "myRecipes Home", root_path, class: "btn btn-lg btn-success", id: "logo" %>
-      <div class="nav-item">
-        <%= link_to "Link 1", recipes_path, class: "topmen btn btn-warning" %>
-      </div>
-        <div class="nav-item">
-        <%= link_to "Link 2", "#", class: "topmen btn btn-warning" %>
-      </div>
-      <div class="nav-item">
-        <%= link_to "Add a New Recipe", new_recipe_path, class: "topmen btn btn-warning" %>
-      </div>
-    
+      
+      <% if logged_in? %>
+        <%= link_to "myRecipes Home", recipes_path, class: "btn btn-lg btn-success", id: "logo" %>
+      <% else %>
+         <%= link_to "myRecipes Home", root_path, class: "btn btn-lg btn-success", id: "logo" %>
+          <div class="topmen">
+            <%= link_to "Browse Recipes", recipes_path, class: "btn btn-warning" %>
+          </div>
+      <% end %>
+      
+     
+      
+      <% if logged_in? %>
+          <div class="topmen">
+            <%= link_to "Add a New Recipe", new_recipe_path, class: "btn btn-warning" %>
+          </div>
+          <!--dropdown -->
+          
+          <ul class="topmen">
+            <li class="dropdown">
+              <%= link_to "#", class: "btn btn-danger dropdown-toggle", "data-toggle" => "dropdown" do %>
+                User Options <b class="caret"></b> 
+                <% end %>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "View Profile", chef_path(current_user) %></li>
+                  <li><%= link_to "Edit Profile", edit_chef_path(current_user) %></li>
+                  <li class="divider"></li>
+                  <li> <%= link_to "Logout", logout_path %> </li>
+                </ul>
+            </li>
+          </ul>
+          
+         
+      <% else %>
+            <div class="topmen">
+            <%= link_to "Login", login_path, class: "btn btn-warning" %>
+          </div>
+      <% end %>
+      
+   <% if logged_in? %>
+        <div class="pull-right">
+           <%= get_gravimage(current_user, size:50) %>
+            <small style="color:white;">Logged in as: <%= current_user.chefname %> </small>
+            
+          </div>
+        
+       <% end %>
     </div>
+       
 </header>
