@@ -1,3 +1,13 @@
+<ul class="nav nav-tabs">
+    <li class="active">
+        <%= link_to "Recipes", recipes_path %>
+    </li>
+    <li>
+        <%= link_to "Chefs", chefs_path %>
+    </li>
+</ul>
+
+
 <div class = "row">
     <div class="col-md-3">
         <div class="pull-right">
@@ -36,12 +46,9 @@
             <%= image_tag(r.picture.url, size: "200x100", class: "imgspace img-thumbnail") if r.picture? %>
         </div>
     </div>
-    <HR/>
+    <hr/>
 <% end %>
- <div class = "row">
-    <div class="col-md-3">
-        <div class="pull-right">
-            <%= will_paginate %>    
-        </div>
-    </div>
+<div style="margin-top:-40px;">
+<%= will_paginate %>    
 </div>
+
