@@ -30,7 +30,18 @@
         <div class = "col-md-6 well">
            <h3 style='margin-top: -5px'><%= link_to r.name, r %> </h3><br>
             <p> <%= r.summary %></p>
-            <small>Posted <%= time_ago_in_words(r.created_at) %> ago.</small><br>
+           <p> Styles: <% r.styles.each do |style| %>
+                <%= style.name %> | 
+            <% end %>
+            </p>
+            <p> Ingredietns: <% r.ingredients.each do |ing| %>
+                <%= ing.name %> | 
+            <% end %>
+            </p>
+            
+            <small>Posted <%= time_ago_in_words(r.created_at) %> ago.</small>
+            <br>
+            
              <div class="pull-right">
                 <small><%= r.thumbs_up_total %></small>
                 <%= link_to like_recipe_path(r, like: true), method: :post do %>

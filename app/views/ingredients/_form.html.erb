@@ -1,0 +1,11 @@
+<div class="row">
+    <div class='col-md-8 col-md-offset-2 well'>
+        <%= form_for @ing do |f| %>
+            <div class="form-group">
+                 Name: <%= f.text_field :name, class:"form-control" %><br />
+            </div>
+              <%= f.submit "Add New Ingredient", class:"btn btn-primary" %>
+              <%= link_to "Cancel", :back, class:"btn btn-danger" %>
+        <% end %>
+    </div>
+</div>
