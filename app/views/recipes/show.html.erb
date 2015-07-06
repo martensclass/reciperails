@@ -10,7 +10,26 @@
         <div class="col-md-7">
             <h3>Summary:  <%= @recipe.summary %> </h3><hr style = 'background-color: #999; height: 2px' />
             <%= simple_format(@recipe.description) %>
+            
+            <% if @recipe.styles.any? %>
+                <p> Styles: <% @recipe.styles.each do |style| %>
+                    | <%= link_to style.name, style %>
+                <% end %>
+                </p>
+            <% else %>
+                <p>Styles: | n/a</p>
+            <% end %>
+            <% if @recipe.ingredients.any? %>
+                <p> Ingredietns: <% @recipe.ingredients.each do |ing| %>
+                    | <%= link_to ing.name, ing %> 
+                <% end %>
+                </p>
+            <% else %>
+                <p>Ingredients: | n/a </p>
+            <% end %>
+        
         </div>
+        
         <div class="col-md-5">
             <%= image_tag(@recipe.picture.url, size:"400x240", class: 'img img-rounded img-responsive') if @recipe.picture? %> <br/>
             <div class="pull-right">

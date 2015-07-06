@@ -1,4 +1,7 @@
 class IngredientsController < ApplicationController
+    
+     before_action :require_user, except: [:show]
+    
    def new
         @ing = Ingredient.new
    end 
@@ -16,6 +19,10 @@ class IngredientsController < ApplicationController
       
    end
    
+    def show
+      @ing = Ingredient.find(params[:id])
+      @recipes = @ing.recipes.paginate(page: params[:page], per_page: 3)
+    end
    
    private 
    

@@ -1,0 +1,55 @@
+<ul class="nav nav-tabs">
+    <li>
+        <%= link_to "Back to All Recipes", recipes_path %>
+    </li>
+</ul>
+
+<h1>All recipes containing <%= @ing.name %></h1><hr/>
+<div class="pull-right"><%= will_paginate @recipes %></div>
+<% @recipes.each do |r| %>
+<div class="row">
+    <div class = "col-md-2 imgspace">
+        <%= get_gravimage r.chef, size:100  %>
+        <br/>
+       <small> Posted by:
+        <%= link_to r.chef.chefname, r.chef %> </small>
+    </div>
+        <div class = "col-md-6 well">
+           <h3 style='margin-top: -5px'><%= link_to r.name, r %> </h3><br>
+            <p> <%= r.summary %></p>
+          <% if r.styles.any? %>
+                <p> Styles: <% r.styles.each do |style| %>
+                    | <%= link_to style.name, style %>
+                <% end %>
+                </p>
+            <% else %>
+                <p>Styles: | n/a</p>
+            <% end %>
+            <% if r.ingredients.any? %>
+                <p> Ingredietns: <% r.ingredients.each do |ing| %>
+                    | <%= link_to ing.name, ing %> 
+                <% end %>
+                </p>
+            <% else %>
+                <p>Ingredients: | n/a</p>
+            <% end %>
+            
+            <small>Posted <%= time_ago_in_words(r.created_at) %> ago.</small>
+            
+             <div class="pull-right">
+                <small><%= r.thumbs_up_total %></small>
+                <%= link_to like_recipe_path(r, like: true), method: :post do %>
+                    <span class="glyphicon glyphicon-thumbs-up"></span> <small>Like</small>
+                <% end %> | 
+                <small><%= r.thumbs_down_total %></small>
+                 <%= link_to like_recipe_path(r, like: false), method: :post do %>            
+                <span class="glyphicon glyphicon-thumbs-down"></span> <small>Dislike</small> 
+                <% end %>
+            </div>
+        </div>
+        <div class = "col-md-3">
+            <%= image_tag(r.picture.url, size: "200x100", class: "imgspace img-thumbnail") if r.picture? %>
+        </div>
+    </div>
+    <hr/>
+<% end %>

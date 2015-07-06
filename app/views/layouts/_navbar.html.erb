@@ -6,22 +6,55 @@
         <%= link_to "myRecipes Home", recipes_path, class: "btn btn-lg btn-success", id: "logo" %>
       <% else %>
          <%= link_to "myRecipes Home", root_path, class: "btn btn-lg btn-success", id: "logo" %>
-          <div class="topmen">
-            <%= link_to "Browse Recipes", recipes_path, class: "btn btn-warning" %>
-          </div>
       <% end %>
+      
+       <div class="topmen">
+             <li class="dropdown">
+              <%= link_to "#", class: "btn btn-warning btn-sm dropdown-toggle", "data-toggle" => "dropdown" do %>
+                Browse By Style <b class="caret"></b> 
+                <% end %>
+                <ul class="dropdown-menu">
+                    <% Style.all.each do |style| %>
+                      <li> <%= link_to style.name, style %></li>
+                    <% end %>
+                    
+                    <% if logged_in? %>
+                     <li class="divider"></li>
+                     <li> <%= link_to "Add a New Style", new_style_path %> </li>
+                    <% end %>
+                </ul>
+            </li>
+      </div>
+      
+       <div class="topmen">
+             <li class="dropdown">
+              <%= link_to "#", class: "btn btn-warning btn-sm dropdown-toggle", "data-toggle" => "dropdown" do %>
+               Browse By Ingredient <b class="caret"></b> 
+                <% end %>
+                <ul class="dropdown-menu">
+                    <% Ingredient.all.each do |ing| %>
+                      <li> <%= link_to ing.name, ing %></li>
+                    <% end %>
+                     <% if logged_in? %>
+                     <li class="divider"></li>
+                     <li> <%= link_to "Add a New Ingredient", new_ingredient_path %> </li>
+                    <% end %>
+                </ul>
+            </li>
+      </div>
       
      
       
       <% if logged_in? %>
-          <div class="topmen">
-            <%= link_to "Add a New Recipe", new_recipe_path, class: "btn btn-warning" %>
+          <div class="topmen" style="margin-left: 25px;">
+            <%= link_to "Add a New Recipe", new_recipe_path, class: "btn btn-warning btn-sm" %>
           </div>
-          <!--dropdown -->
           
-          <ul class="topmen">
+          <!--dropdown -->
+          <div style="float:right">
+          <ul class="topmen" style="margin-right:5px;border-left: 1px solid white">
             <li class="dropdown">
-              <%= link_to "#", class: "btn btn-danger dropdown-toggle", "data-toggle" => "dropdown" do %>
+              <%= link_to "#", class: "btn btn-danger btn-sm dropdown-toggle", "data-toggle" => "dropdown" do %>
                 User Options <b class="caret"></b> 
                 <% end %>
                 <ul class="dropdown-menu">
@@ -32,22 +65,19 @@
                 </ul>
             </li>
           </ul>
-          
+         <div class='pull-right'>
+          <%= get_gravimage(current_user, size:50) %>
+            <small style="color:white;">Logged in as: <%= current_user.chefname %> </small>
+          </div>
+         </div>
          
       <% else %>
-            <div class="topmen">
+            <div class="topmen pull-right">
             <%= link_to "Login", login_path, class: "btn btn-warning" %>
           </div>
       <% end %>
       
-   <% if logged_in? %>
-        <div class="pull-right">
-           <%= get_gravimage(current_user, size:50) %>
-            <small style="color:white;">Logged in as: <%= current_user.chefname %> </small>
-            
-          </div>
-        
-       <% end %>
+  
     </div>
        
 </header>

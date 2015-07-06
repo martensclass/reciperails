@@ -12,6 +12,21 @@
             <div class = "form-group">
               Description : <%= f.text_area :description, :rows => "8", class:"form-control" %><br />
             </div>
+             <div class = "form-group">
+           Styles (check all that apply):<br/>
+            
+            <%= f.collection_check_boxes :style_ids, Style.all, :id, :name do |cb| %>
+              <% cb.label(class: "checkbox-inline") { cb.check_box(class: "checkbox") + cb.text } %>
+            <% end %>
+            </div>
+             <div class = "form-group">
+            Ingredients (check all that apply):<br/>
+            
+            <%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name do |cb| %>
+              <% cb.label(class: "checkbox-inline") { cb.check_box(class: "checkbox") + cb.text } %>
+            <% end %>
+            </div>
+            
             
               Upload Image: <i>(optional)</i>
                <%= f.file_field :picture, accept:'image/jpeg,image/gif,image/png' %><br />
