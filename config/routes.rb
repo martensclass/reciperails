@@ -7,7 +7,7 @@ Rails.application.routes.draw do
  #index / #show
  #edit / #update
  #new / #create
- #delete / destroy
+ #destroy
  
  resources :recipes do
  

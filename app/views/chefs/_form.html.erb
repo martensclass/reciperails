@@ -13,7 +13,7 @@
               <%= @chef.new_record? ? "Password:" : "New Password: (leave blank to keep the same password)" %> <%= f.password_field :password, class:"form-control" %><br />
             </div>
             
-              <%= f.submit @chef.new_record? ? "Register me as a New Chef" : "Update Profile", class:"btn btn-primary" %>
+              <%= f.submit @chef.new_record? ? "Register me as a New Chef" : "Update Profile", class:"btn btn-warning" %>
               <%= link_to "Cancel", :back, class:"btn btn-danger" %>
         <% end %>
     </div>

@@ -1,9 +1,16 @@
+<ul class="nav nav-tabs">
+    <li>
+        <%= link_to "Back to All Recipes", recipes_path %>
+    </li>
+</ul>
+
 <h1><%= @recipe.name %> Details</h1>
 <div class="row">
     <div class="col-md-2 imgspace">
         <small>Brought to you by</small><br/>
         <%= get_gravimage @recipe.chef, size:150  %> <br/>
        <%= link_to @recipe.chef.chefname, @recipe.chef %> 
+       
     </div>
     <div class="col-md-9 well">
     <div class="row">
@@ -27,7 +34,12 @@
             <% else %>
                 <p>Ingredients: | n/a </p>
             <% end %>
-        
+        <% if @recipe.chef == current_user || (logged_in? && current_user.admin) %>
+        <br/><br/>
+           <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "btn btn-warning btn-sm" %>
+           <%= link_to "Delete Recipe", @recipe, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+            
+        <% end %>
         </div>
         
         <div class="col-md-5">
@@ -45,11 +57,4 @@
         </div>
     </div>
     </div>    
-</div>
-<div class="row">
-    <div class="col-md-8 col-md-offset-2"><%= link_to "Back to All Recipes", recipes_path, class: "btn btn-warning" %>
-       <% if @recipe.chef == current_user %>
-           <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "btn btn-primary" %>
-        <% end %>
-    </div>
 </div>

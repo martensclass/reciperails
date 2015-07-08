@@ -1,13 +1,19 @@
+<ul class="nav nav-tabs">
+    <li>
+        <%= link_to "Back to All Recipes", recipes_path %>
+    </li>
+</ul>
+
 <div class="row">
     <div class="col-md-3 img-space">
          <%= get_gravimage @chef, size:300  %><br/>
          <% if current_user == @chef %>
-            <center> <%= link_to "Update My Profile", edit_chef_path, class:"btn btn-primary btn-sm" %> </center>
+            <center> <%= link_to "Update My Profile", edit_chef_path, class:"btn btn-warning btn-sm" %> </center>
         <% end %>
     </div>
     <div class="col-md-8 col-md-offset-1">
         <div class="pull-right"><%= will_paginate @recipes%></div>
-        <h4>All recipes by <%= @chef.chefname %> </h4> <hr/> 
+        <h4>All recipes by <%= @chef.chefname %> </h4>  
          <br/>
           <% @recipes.each do |r| %>
            <div class="row">
