@@ -27,7 +27,7 @@
     <div class="col-md-5 well" style="margin-top:10px">
         <h3><%= link_to c.chefname, c %></h3><hr style = 'background-color: #999; height: 1px' />
         <p><%= c.email %>
-        <% if (current_user.admin) %>
+        <% if (logged_in? and current_user.admin) %>
           <%= link_to "Delete Chef", c , method: :delete, data: { confirm: "Thids will remove chef and all chefs recipes - are you sure?" }, class: "btn btn-danger btn-sm pull-right" %>
         <% end %>
         </p>

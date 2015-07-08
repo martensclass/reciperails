@@ -2,6 +2,7 @@
     <li>
         <%= link_to "Back to All Recipes", recipes_path %>
     </li>
+    
 </ul>
 
 <div class="row">
@@ -12,9 +13,9 @@
         <% end %>
     </div>
     <div class="col-md-8 col-md-offset-1">
-        <div class="pull-right"><%= will_paginate @recipes%></div>
-        <h4>All recipes by <%= @chef.chefname %> </h4>  
-         <br/>
+        <table width=100%><tr>
+        <td><h4>All recipes by <%= @chef.chefname %> </h4></td><td><%= will_paginate @recipes%> </td>
+         </tr></table>
           <% @recipes.each do |r| %>
            <div class="row">
                <div class = "col-md-9 well">
