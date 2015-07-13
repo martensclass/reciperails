@@ -2,6 +2,8 @@ class Recipe < ActiveRecord::Base
     belongs_to :chef
     has_many :likes, dependent: :destroy
     
+    has_many :comments, dependent: :destroy
+    
     has_many :recipe_styles, dependent: :destroy
     has_many :styles, through: :recipe_styles
     
@@ -25,6 +27,14 @@ class Recipe < ActiveRecord::Base
     
     def thumbs_down_total
        self.likes.where(like: false).size 
+    end
+    
+    def chef_comments(c)
+       self.comments.where(chef: c)
+    end
+    
+    def chef_likes(c)
+        self.likes.where(chef: c)
     end
     
     private

@@ -57,16 +57,18 @@ h2{
     text-align: center;
     font-weight: normal;
     color: #777;
-   
 }
 h4{
     font-size: 2.5em;
     letter-spacing: -2px;
 }
- .jumbotext{
-        color: darken($light-orange,20%);
-    }
-    
+.jumbotext{
+        background-color: rgba(100,100,100,.7);
+        color: white;
+        padding-top: 10px;
+        padding-bottom: 10px;
+}
+
 
 .left{
     text-align: left;
@@ -98,4 +100,21 @@ small{
 
 .well{
     background: rgba(126, 171, 103,.15);
+}
+
+th{
+    background-color: $jumbotron-bg;
+    border-left: 1px solid #999;
+    padding: 10px;
+}
+td.comment{
+    padding-left: 10px;
+    border-left: 1px solid $jumbotron-bg;
+}
+
+.jumbotron {
+    background: url("food.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    
 }

@@ -5,6 +5,7 @@
 </ul>
 
 <h1><%= @recipe.name %> Details</h1>
+
 <div class="row">
     <div class="col-md-2 imgspace">
         <small>Brought to you by</small><br/>
@@ -45,6 +46,17 @@
         <div class="col-md-5">
             <%= image_tag(@recipe.picture.url, size:"400x240", class: 'img img-rounded img-responsive') if @recipe.picture? %> <br/>
             <div class="pull-right">
+                <% if logged_in? %>
+                    <% if @recipe.chef_likes(current_user).size==1 %>
+                    <% cheflike = @recipe.chef_likes(current_user).first %>
+                        <small>You have <b><%= (cheflike.like == true ? "liked" : "disliked") %></b> this recipe. 
+                        [<%= link_to changevote_recipe_path, method: :patch do %> Change your vote <% end %>]</small><br>
+                    <% else %>
+                        <small>You have not yet voted for this recipe</small><br>
+                    <% end %>
+                <% else %>
+                    <%= link_to "Log in ", login_path %> to vote <br>
+                <% end %>
                 <small><%= @recipe.thumbs_up_total %></small>
                 <%= link_to like_recipe_path(@recipe, like: true), method: :post do %>
                     <span class="glyphicon glyphicon-thumbs-up"></span> <small>Like</small>
@@ -56,5 +68,76 @@
             </div>
         </div>
     </div>
-    </div>    
+    </div>  
 </div>
+<div class="row">
+    <div class="col-md-9 col-md-offset-2">
+        
+        <div id="comform">
+        
+        <h5 style="margin-top: 0px;">Leave a Comment  <button id="btncancel" class="btn btn-danger btn-xs">Cancel</button> </h5>
+            <%= form_tag(comment_recipe_path, :method=>'post') do %>
+                <div class="form-group">
+                    <%= text_area_tag 'content', nil, rows:5, cols: 40, class:"form-control" %><br />
+                </div>
+            <%= submit_tag "Submit Comment", class: "btn btn-primary" %> 
+             <% end %>
+           
+        </div>
+        
+        <% if logged_in? %>
+            <% if @recipe.chef_comments(current_user).size==1 %>
+                <% chefcom = @recipe.chef_comments(current_user).first %>
+               
+                <p class="well"><b>You have commented: &nbsp;&nbsp;&nbsp;</b> <%= @recipe.chef_comments(current_user).first.content %> 
+                | <%= link_to "Delete comment", comment_path(chefcom), method: :delete %> </p>
+                
+            <% else %>
+                <button id="btncom" class="btn btn-primary">Leave a comment</button>
+            <% end %>
+        <% else %>
+             <h5 style="margin-top: 0px;"> <%= link_to "Log in ", login_path %> to leave a Comment</h5>
+        <% end %>
+    </div>
+</div>
+<div class="row">
+     <div class="col-md-9 col-md-offset-2">
+    <h2>All Comments</h2>
+    <table width=100%>
+    <th>Posted By</th><th>Comment</th>
+    <% @comments.each do |com| %>
+    <tr class="well">
+        <td width=20%>
+            <div class="pull-left">
+                <%= get_gravimage(com.chef, size:50) %>
+            </div>
+            <div style="width:50px;padding-top:10px;padding-left:10px;float:left;">
+                <small><%= com.chef.chefname %> </small>
+            </div>
+        </td>
+        <td class="comment">
+            <%= com.content %>
+            <br><small><i><%= com.updated_at.strftime("%m/%d/%Y") %></i></small>
+        </td>
+    </tr>
+    <% end %>
+    </table>
+    </div>
+</div>
+
+<script type = "text/javascript">
+
+  $('document').ready(function() {
+    $("#comform").hide();  
+   $("#btncom").click(function(){ 
+    $("#comform").slideDown();  
+     $("#btncom").hide();
+   });
+   $("#btncancel").click(function(){ 
+    $("#comform").slideUp();  
+     $("#btncom").show();
+   });
+});
+  
+ 
+</script>

@@ -66,9 +66,13 @@
             </li>
           </ul>
          <div class='pull-right'>
-          <%= get_gravimage(current_user, size:50) %>
-            <small style="color:white;">Logged in as: <%= current_user.chefname %> </small>
-          </div>
+             <div class="pull-left">
+                <%= get_gravimage(current_user, size:50) %>
+            </div>
+            <div style="width:150px;padding-top:10px;padding-left:10px;float:left;">
+                <small style="color:white;">Logged in as:<br/> <%= current_user.chefname %> </small>
+            </div>
+          
          </div>
          
       <% else %>

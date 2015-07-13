@@ -13,9 +13,13 @@ Rails.application.routes.draw do
  
   member do
     post "like"
+    post "comment"
+    patch "changevote"
   end
  
  end
+ 
+ resources :comments, only: [:destroy]
  
  resources :chefs, except: [:new]
  

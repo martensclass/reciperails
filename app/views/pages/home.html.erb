@@ -1,12 +1,9 @@
 <div class="jumbotron center">
+    <div class="jumbotext">
     <h1>Welcome to myRecipes App</h1>
-    
-    <h2 class="jumbotext">
-        This is the home page for the ruby on rails app
-    </h2>
-    
-    <%= link_to "Sign up now", register_path, class: "btn btn-large btn-success" %>
-    
+     <p>A place to share your favourite recipes</p><br/>
+    <%= link_to "Sign up now", register_path, class: "btn btn-large btn-primary" %>
+    </div>
 </div>
 
 <div class="row">
@@ -14,7 +11,7 @@
         <h3 class="midrow">
             View Recipes as Guest User
         </h3>
-        <h2 class="left">Browse and view recipes as a guest and Sign up later</h2>
+        <h2 class="left">Browse and view all recipes as a guest and Sign up later.  You can also filter by styles or ingredients.</h2>
         <p> <%= link_to "Browse Recipe Listings", recipes_path, class: "btn btn-warning btn-small" %> </p>
     </div>
     

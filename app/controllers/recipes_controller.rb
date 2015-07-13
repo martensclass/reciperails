@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
    
-   before_action :set_recipe, only: [:show, :edit, :update, :like, :destroy]
+   before_action :set_recipe, only: [:show, :edit, :update, :like, :destroy, :comment, :changevote]
    before_action :require_user, except: [:show, :index]
    before_action :require_same_user, only: [:edit, :update]
    
@@ -9,7 +9,7 @@ class RecipesController < ApplicationController
    end
    
    def show
-     
+     @comments = @recipe.comments
    end
    
    def destroy
@@ -49,6 +49,16 @@ class RecipesController < ApplicationController
       end
    end
    
+   def comment
+      comment = Comment.create(content: params[:content], chef: current_user, recipe: @recipe)
+      if comment.valid?
+         flash[:success] = "Your comment was recorded."
+      else
+         flash[:danger] = "You can only comment once for each recipe."
+      end
+      redirect_to :back
+   end
+   
    
    def like
          like = Like.create(like: params[:like], chef: current_user, recipe: @recipe)
@@ -57,6 +67,13 @@ class RecipesController < ApplicationController
          else
             flash[:danger] = "You can only vote once for each recipe."
          end
+      redirect_to :back
+   end
+   
+   def changevote
+      like=Like.where(recipe: @recipe, chef: current_user).first
+      like.toggle!(:like)
+      flash[:success] = "Your vote for " + @recipe.name + " has been changed."
       redirect_to :back
    end
    
