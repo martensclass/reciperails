@@ -3,9 +3,10 @@
         <%= link_to "Back to All Recipes", recipes_path %>
     </li>
 </ul>
-
-<h1>All recipes for style <%= @style.name %></h1><hr/>
-<div class="pull-right"><%= will_paginate @recipes %></div>
+<table width=100%><tr><td><h1>All recipes for style <%= @style.name %></h1></td>
+<td><%= will_paginate @recipes %></td>
+</tr></table>
+<hr/>
 <% @recipes.each do |r| %>
 <div class="row">
     <div class = "col-md-2 imgspace">
@@ -36,7 +37,17 @@
             
             <small>Posted <%= time_ago_in_words(r.created_at) %> ago.</small>
             
-             <div class="pull-right">
+            
+              <div class="pull-right">
+                <% if logged_in? %>
+                    <% if r.chef_likes(current_user).size==1 %>
+                    <% cheflike = r.chef_likes(current_user).first %>
+                        <small>You have <b><%= (cheflike.like == true ? "liked" : "disliked") %></b> this recipe. 
+                        [<%= link_to changevote_recipe_path(r), method: :patch do %> Change your vote <% end %>]</small><br>
+                    <% else %>
+                        <small>You have not yet voted for this recipe</small><br>
+                    <% end %>
+                <% end %>
                 <small><%= r.thumbs_up_total %></small>
                 <%= link_to like_recipe_path(r, like: true), method: :post do %>
                     <span class="glyphicon glyphicon-thumbs-up"></span> <small>Like</small>
