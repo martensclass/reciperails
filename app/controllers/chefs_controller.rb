@@ -27,6 +27,7 @@ def create
     @chef = Chef.new(chef_params)
     if @chef.save
          flash[:success] = "You have successfully registered"
+         session[:chef_id] = @chef.id
          redirect_to recipes_path
     else
         flash[:danger] = @chef.errors.full_messages
