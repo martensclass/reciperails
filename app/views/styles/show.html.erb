@@ -3,9 +3,12 @@
         <%= link_to "Back to All Recipes", recipes_path %>
     </li>
 </ul>
+
 <table width=100%><tr><td><h1>All recipes for style <%= @style.name %></h1></td>
 <td><%= will_paginate @recipes %></td>
 </tr></table>
+
+
 <hr/>
 <% @recipes.each do |r| %>
 <div class="row">
