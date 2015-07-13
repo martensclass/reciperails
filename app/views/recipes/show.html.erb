@@ -54,8 +54,6 @@
                     <% else %>
                         <small>You have not yet voted for this recipe</small><br>
                     <% end %>
-                <% else %>
-                    <%= link_to "Log in ", login_path %> to vote <br>
                 <% end %>
                 <small><%= @recipe.thumbs_up_total %></small>
                 <%= link_to like_recipe_path(@recipe, like: true), method: :post do %>
@@ -130,11 +128,11 @@
   $('document').ready(function() {
     $("#comform").hide();  
    $("#btncom").click(function(){ 
-    $("#comform").slideDown();  
+    $("#comform").slideDown("fast");  
      $("#btncom").hide();
    });
    $("#btncancel").click(function(){ 
-    $("#comform").slideUp();  
+    $("#comform").hide();  
      $("#btncom").show();
    });
 });
